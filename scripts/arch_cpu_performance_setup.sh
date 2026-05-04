@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# motu:name=Arch CPU Performance Setup
+# motu:description=Enable power-profiles-daemon performance mode and Intel turbo on Arch-family systems.
+# motu:runner=sudo
 # Arch-family CPU turbo/performance setup.
 # Keeps power-profiles-daemon as the active power manager, disables
 # auto-cpufreq, enables Intel turbo, and verifies the resulting CPU limits.

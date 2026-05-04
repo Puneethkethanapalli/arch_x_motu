@@ -1,6 +1,66 @@
+# arch_x_motu
+
+Interactive setup helpers for Arch-family laptops.
+
+## One-Line Interactive Run
+
+Run this as your normal user, not with `sudo`. The launcher asks which scripts you want to run and uses `sudo` only for scripts that are tagged as root setup scripts.
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/Puneethkethanapalli/arch_x_motu/main/run.sh | bash
+```
+
+When launched this way, reports are written to:
+
+```text
+./motu-reports/
+```
+
+If you cloned the repo locally, run:
+
+```sh
+./run.sh
+```
+
+Local reports are written to:
+
+```text
+./reports/
+```
+
+List discovered scripts without running anything:
+
+```sh
+./run.sh --list
+```
+
+Run every discovered script:
+
+```sh
+./run.sh --all
+```
+
+## Adding More Scripts
+
+Put new scripts in `scripts/` with a `.sh` extension. The launcher discovers them automatically.
+
+Optional metadata near the top of each script:
+
+```sh
+# motu:name=Friendly Name
+# motu:description=Short explanation shown in the picker.
+# motu:runner=user
+```
+
+Runner values:
+
+- `user`: run as the current user. This is the default.
+- `sudo`: run with `sudo` when the launcher is not already root.
+- `root`: same behavior as `sudo`.
+
 # Arch CPU Performance Setup
 
-This folder contains `arch_cpu_performance_setup.sh`, a small Arch-family helper script for keeping Intel turbo enabled while using `power-profiles-daemon` as the active power manager.
+`scripts/arch_cpu_performance_setup.sh` is a small Arch-family helper script for keeping Intel turbo enabled while using `power-profiles-daemon` as the active power manager.
 
 It is meant for Arch, CachyOS, EndeavourOS, Manjaro, and Garuda.
 
@@ -20,7 +80,7 @@ Go to the script folder and run the setup once:
 
 ```sh
 cd /home/puneeth/Desktop/system
-sudo ./arch_cpu_performance_setup.sh
+sudo ./scripts/arch_cpu_performance_setup.sh
 ```
 
 Then reboot:
@@ -33,7 +93,7 @@ After reboot, verify:
 
 ```sh
 cd /home/puneeth/Desktop/system
-./arch_cpu_performance_setup.sh --verify-only
+./scripts/arch_cpu_performance_setup.sh --verify-only
 ```
 
 If the output shows this, you are done:
@@ -49,9 +109,9 @@ Use this flow:
 
 ```sh
 cd /home/puneeth/Desktop/system
-sudo ./arch_cpu_performance_setup.sh
+sudo ./scripts/arch_cpu_performance_setup.sh
 reboot
-./arch_cpu_performance_setup.sh --verify-only
+./scripts/arch_cpu_performance_setup.sh --verify-only
 ```
 
 If `intel_pstate/no_turbo` is `0`, stop. If it is `1`, inspect which service or firmware setting turned turbo off before adding any workaround.
@@ -118,7 +178,7 @@ During all-core load, do not expect every core to stay at `4.8 GHz`. That number
 
 # Display Refresh Power Setup
 
-This folder also contains `display_refresh_power_setup.sh`, a user-session helper for switching the internal laptop display refresh rate based on charger state.
+`scripts/display_refresh_power_setup.sh` is a user-session helper for switching the internal laptop display refresh rate based on charger state.
 
 It uses:
 
@@ -146,7 +206,7 @@ These commands work from Bash, Zsh, and Fish because the script uses its own Bas
 
 ```sh
 cd /home/puneeth/Desktop/system
-./display_refresh_power_setup.sh
+./scripts/display_refresh_power_setup.sh
 ```
 
 This installs and starts a user systemd service:
@@ -161,7 +221,7 @@ The service checks power state every few seconds and only changes refresh rate w
 
 ```sh
 cd /home/puneeth/Desktop/system
-./display_refresh_power_setup.sh --status
+./scripts/display_refresh_power_setup.sh --status
 ```
 
 Expected while plugged in:
@@ -184,12 +244,12 @@ To switch once without installing the background service:
 
 ```sh
 cd /home/puneeth/Desktop/system
-./display_refresh_power_setup.sh --apply
+./scripts/display_refresh_power_setup.sh --apply
 ```
 
 ## Uninstall
 
 ```sh
 cd /home/puneeth/Desktop/system
-./display_refresh_power_setup.sh --uninstall
+./scripts/display_refresh_power_setup.sh --uninstall
 ```

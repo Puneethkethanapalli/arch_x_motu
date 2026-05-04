@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# motu:name=Display Refresh Power Setup
+# motu:description=Install a user service that switches the internal display between AC and battery refresh rates.
+# motu:runner=user
 # Switch the internal laptop display refresh rate based on AC power.
 # AC power: 120 Hz. Battery: 60 Hz.
 
